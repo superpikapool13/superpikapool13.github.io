@@ -101,7 +101,7 @@ function card(repo) {
   repoLink.href = repo.html_url;
   pills.append(repoLink);
   if (repo.homepage) {
-    const live = el("a", "pill", "Live site");
+    const live = el("a", "pill live", "Live site");
     live.href = repo.homepage;
     pills.append(live);
   }
@@ -117,7 +117,7 @@ function card(repo) {
     lang.append(dot, repo.language);
     meta.append(lang);
   }
-  meta.append(el("span", null, `★ ${repo.stars}`));
+  meta.append(el("span", "star", `★ ${repo.stars}`));
   const date = new Date(repo.pushed_at).toLocaleDateString(undefined, { month: "short", year: "numeric" });
   meta.append(el("span", null, `Updated ${date}`));
   body.append(meta);
