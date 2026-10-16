@@ -7,6 +7,7 @@
   --muted: #a3a1ba;
   --yellow: #ffd23f;
   --red: #d62839;
+  --red-text: #ff6b78;
   --ink: #1c1b2e;
   --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px rgba(0, 0, 0, .4);
   color-scheme: dark;
@@ -23,6 +24,8 @@ body {
 .brand { display: flex; align-items: center; gap: 16px; }
 .brand img { width: 56px; height: 56px; flex: none; }
 .top h1 { margin: 0; font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -.02em; line-height: 1.1; }
+.top h1 a { color: inherit; text-decoration: underline transparent 3px; text-underline-offset: 6px; transition: text-decoration-color .15s; }
+.top h1 a:hover, .top h1 a:focus-visible { text-decoration-color: var(--yellow); outline: none; }
 .top p { margin: 12px 0 0; color: var(--muted); }
 
 main { max-width: 1120px; margin: 0 auto; padding: 0 24px 80px; }
@@ -33,8 +36,8 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 24px 80px; }
 .card {
   display: flex; flex-direction: column;
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 24px;
+  border: 3px solid var(--border);
+  border-radius: 12px;
   box-shadow: var(--shadow);
   overflow: hidden;
 }
@@ -46,17 +49,18 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 24px 80px; }
 
 .pills { display: flex; flex-wrap: wrap; gap: 8px; }
 .pill {
-  padding: 4px 14px; border-radius: 999px;
-  background: var(--yellow); color: var(--ink);
+  padding: 3px 14px; border-radius: 999px;
+  border: 2px solid var(--yellow); background: transparent; color: var(--yellow);
   font-size: .85rem; font-weight: 700; text-decoration: none;
+  transition: background-color .15s, color .15s;
 }
-.pill.live { background: var(--red); color: #fff; }
-.pill:hover { filter: brightness(1.12); }
+.pill:hover, .pill:focus-visible { background: var(--yellow); color: var(--ink); }
+.pill.live { border-color: var(--red); color: var(--red-text); }
+.pill.live:hover, .pill.live:focus-visible { background: var(--red); color: #fff; }
 .pill:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
 
 .meta { display: flex; flex-wrap: wrap; gap: 6px 16px; color: var(--muted); font-size: .85rem; }
 .meta span { display: inline-flex; align-items: center; gap: 6px; }
-.meta .star { color: var(--yellow); }
 .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--muted); }
 
 .skeleton .media, .skeleton .line {

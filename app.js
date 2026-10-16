@@ -15,7 +15,9 @@ const $grid = document.getElementById("grid");
 const $error = document.getElementById("error");
 const $subtitle = document.getElementById("subtitle");
 
-document.getElementById("title").textContent = `${USERNAME}'s projects`;
+const titleLink = el("a", null, USERNAME);
+titleLink.href = `https://github.com/${USERNAME}?tab=repos`;
+document.getElementById("title").replaceChildren(titleLink, "\u2019s projects");
 
 // ---------- cache ----------
 function loadCache() {
@@ -45,7 +47,6 @@ function slim(r) {
   return {
     name: r.name, description: r.description, html_url: r.html_url,
     homepage: normalizeHomepage(r.homepage), language: r.language,
-    stars: r.stargazers_count, pushed_at: r.pushed_at,
   };
 }
 function el(tag, className, text) {
@@ -117,10 +118,7 @@ function card(repo) {
     lang.append(dot, repo.language);
     meta.append(lang);
   }
-  meta.append(el("span", "star", `★ ${repo.stars}`));
-  const date = new Date(repo.pushed_at).toLocaleDateString(undefined, { month: "short", year: "numeric" });
-  meta.append(el("span", null, `Updated ${date}`));
-  body.append(meta);
+  if (meta.childElementCount) body.append(meta);
 
   root.append(media, body);
   resolveImage(repo, img);
